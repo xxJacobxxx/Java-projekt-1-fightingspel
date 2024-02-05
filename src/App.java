@@ -1,6 +1,12 @@
 import java.util.Scanner;
+import java.util.Random;
 
 public class App {
+
+    public static int spelarHälsa = 100;
+    public static int motståndarHälsa = 100; 
+    public static String[]attackNamn = {"Palmstrike","Right hook","Spin kick","Low sweep","Front kick"};
+    public static int []attackSkada = {7, 8,10,4,7};
     public static void main(String[] args) throws Exception {
         String spela = "ja";
         Scanner tb = new Scanner(System.in);
@@ -43,9 +49,9 @@ public class App {
             System.out.println();
             System.out.println();
             System.out.println();
-            System.out.println("---------------------------------");
-            System.out.println("-----24 Hour Amazon Survival-----");
-            System.out.println("---------------------------------");
+            System.out.println("-------------------------------------");
+            System.out.println("-------24 Hour Amazon Survival-------");
+            System.out.println("-------------------------------------");
             System.out.println("");
             System.out.println();
             System.out.println();
@@ -63,12 +69,24 @@ public class App {
                 strength=strength*2;
                 intelligence=intelligence*2;
             }
-            String[]attackNamn = {"Palmstrike","Right hook","Spin kick","Low sweep","Front kick"};
-            int []attackSkada = {7, 8,10,4,7};
-            
+           
+
 
             
             spela="false";
+        }
+    }
+    static int spelarAttack (){
+        Scanner tb = new Scanner(System.in);
+        int attackval = 0;
+        Random rand = new Random();
+        int [] attackRandom = {rand.nextInt(5)-1, rand.nextInt(5)-1, rand.nextInt(5)-1};
+        
+        while (attackval!=1 || attackval!=2 || attackval!=3){
+            System.out.println("Attack 1: "+attackNamn[attackRandom[0]]);
+            System.out.println("Attack 2: "+attackNamn[attackRandom[1]]);
+            System.out.println("Attack 3: "+attackNamn[attackRandom[2]]);
+            attackval = tb.nextInt;
         }
     }
 }
