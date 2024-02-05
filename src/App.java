@@ -57,17 +57,17 @@ public class App {
             System.out.println();
             System.out.println();
 
-            int strength = 10;
-            int intelligence = 3;
+            int styrka = 10;
+            int kunskap = 3;
             if (val1==1) {
-                strength=strength +5;
+                styrka=styrka +5;
             }
             else if (val1==2){
-                intelligence++;
+                kunskap++;
             }
             else if(val1==3){
-                strength=strength*2;
-                intelligence=intelligence*2;
+                styrka=styrka*2;
+                kunskap=kunskap*2;
             }
            
 
@@ -76,17 +76,37 @@ public class App {
             spela="false";
         }
     }
-    static int spelarAttack (){
-        Scanner tb = new Scanner(System.in);
+    static int spelarAttack (int styrka, int kunskap){
+        Scanner in = new Scanner(System.in);
         int attackval = 0;
         Random rand = new Random();
-        int [] attackRandom = {rand.nextInt(5)-1, rand.nextInt(5)-1, rand.nextInt(5)-1};
-        
-        while (attackval!=1 || attackval!=2 || attackval!=3){
-            System.out.println("Attack 1: "+attackNamn[attackRandom[0]]);
-            System.out.println("Attack 2: "+attackNamn[attackRandom[1]]);
-            System.out.println("Attack 3: "+attackNamn[attackRandom[2]]);
-            attackval = tb.nextInt;
+        int[]attackRandom= new int[kunskap];
+        for (int i=0; i<kunskap;i++){
+            attackRandom[i] =   rand.nextInt(5)-1;
         }
+        
+        while (true){
+            for(int i=0;i<kunskap;i++){
+            System.out.println("Attack 1: "+attackNamn[attackRandom[i]]);
+            }
+            attackval = in.nextInt();
+            if (attackval== 1) {
+                break;
+            }
+            else if (attackval==2){
+                break;
+            }
+            else if (attackval==3){
+                break;
+            }
+            else{
+                System.out.println("Svara med 1 , 2 eller 3");
+            }
+            
+            
+        }
+        int skada = attackSkada[attackRandom[attackval-1]];
+            skada = skada*styrka;
+        return skada;
     }
 }
