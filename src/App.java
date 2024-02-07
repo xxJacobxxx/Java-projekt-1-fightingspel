@@ -69,6 +69,7 @@ public class App {
                 styrka=styrka*2;
                 kunskap=kunskap*2;
             }
+            System.out.println(spelarAttack(styrka, kunskap));
            
 
 
@@ -78,35 +79,32 @@ public class App {
     }
     static int spelarAttack (int styrka, int kunskap){
         Scanner in = new Scanner(System.in);
-        int attackval = 0;
+        int attackVal = 0;
         Random rand = new Random();
         int[]attackRandom= new int[kunskap];
         for (int i=0; i<kunskap;i++){
-            attackRandom[i] =   rand.nextInt(5)-1;
+            attackRandom[i] =   rand.nextInt(5);
         }
-        
-        while (true){
             for(int i=0;i<kunskap;i++){
-            System.out.println("Attack 1: "+attackNamn[attackRandom[i]]);
+            System.out.println("Attack "+(i+1)+": "+attackNamn[attackRandom[i]]);
             }
-            attackval = in.nextInt();
-            if (attackval== 1) {
-                break;
+            boolean bryt=false;
+            do {
+                attackVal = in.nextInt();
+                for (int i=0;i<kunskap;i++){
+                    if (attackVal==(i+1)) {
+                        bryt=true;
+                        break;
+                    }
+                }
+                if (bryt==false) {
+                    System.out.println("Svara med gällande siffror");
             }
-            else if (attackval==2){
-                break;
-            }
-            else if (attackval==3){
-                break;
-            }
-            else{
-                System.out.println("Svara med 1 , 2 eller 3");
-            }
+        }while(bryt==false);
             
-            
-        }
-        int skada = attackSkada[attackRandom[attackval-1]];
+        int skada = attackSkada[attackRandom[attackVal-1]];
             skada = skada*styrka;
         return skada;
+        }
     }
-}
+
