@@ -73,8 +73,18 @@ public class App {
                 styrka=styrka*2;
                 kunskap=kunskap*2;
             }
-            System.out.println(spelarAttack(styrka, kunskap));
-           
+            while (spelarHälsa==0 || motståndarHälsa==0) {
+            motståndarHälsa = motståndarHälsa-spelarAttack(styrka, kunskap);
+            System.out.println("Motståndarhälsa: "+motståndarHälsa);
+            spelarHälsa = spelarHälsa - motståndarAttack();
+            System.out.println("Din hälsa: "+spelarHälsa);
+            if (spelarHälsa<=0) {
+                spelarHälsa=0;
+            }
+            else if (motståndarHälsa<=0) {
+                motståndarHälsa=0;
+            }
+            }
 
 
             
@@ -109,6 +119,13 @@ public class App {
         int skada = attackSkada[attackRandom[attackVal-1]];
             skada = skada*styrka;
         return skada;
+        }
+        static int motståndarAttack (){
+            Random rand = new Random();
+            int motsåndarSlag = rand.nextInt(5);
+            int skadanGjord = attackSkada[motsåndarSlag]*10;
+            System.out.println("Motståndaren använder: "+attackNamn[motsåndarSlag]+ " Och skadar dig för "+skadanGjord);
+            return skadanGjord;
         }
     }
 
