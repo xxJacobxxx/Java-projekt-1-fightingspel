@@ -3,8 +3,8 @@ import java.util.Random;
 
 public class App {
 
-    public static int spelarHälsa = 100;
-    public static int motståndarHälsa = 100; 
+    public static int spelarHälsa = 1000;
+    public static int motståndarHälsa = 1000; 
     public static String[]attackNamn = {"Palmstrike","Right hook","Spin kick","Low sweep","Front kick"};
     public static int []attackSkada = {7, 8,10,4,7};
     public static void main(String[] args) throws Exception {
@@ -12,8 +12,9 @@ public class App {
         Scanner tb = new Scanner(System.in);
         while (spela.equalsIgnoreCase("ja")) {
             System.out.println("Du befinner dig på en båt påväg mot sydamerikas regnskogar. Som praktikant arbete ska du studera Dendrobatidae grodan, även känd som pilgiftsgrodan. Efter flera timmar av konstant tom horisont kommer en väldigt smal och ilsken kemist och ställer dig inför ett val.");
-            //Thread.sleep(15000);
+            Thread.sleep(15000);
             System.out.println("Det är tufft i skogarna. säger han. Jag kan ge dig en liten boost av styrka med mina hemgjorda steroider eller så kan du få lite kunskap för att verkligen förstå allt som händer i skogen.");
+            Thread.sleep(10000);
             int val1=0;
             while (val1==0) {
                 System.out.println("Väljer du 1: styrkan, 2: kunskapen eller 3: vill du försöka bli vän med kemisten?");
@@ -31,6 +32,7 @@ public class App {
             }
         }
             System.out.println("Efter kemisten givit dig det du bett om tar du dig ner till under deck, en konsekvens av att vara uttråkad. Vapenrummet är fullt med, ja vapen i alla former. Dina ögon dras först till ett svärd. Svärdet verkar vara av asiatiskt ursprung och glänser när solen speglas av det. Till vänster om svärdet har någon sattit upp en flintlock pistol på väggen. Den hade varit dödlig om skotten träffade tänker du medans dina ögon seglar mot elefanten i rummet. Kanonen står ståtligt, laddad och redo för att sänka skepp.");
+            Thread.sleep(10000);;
             System.out.println("Du bestämmer dig att ta med ett vapen till skogen.");
             int val2=0;
             while (val2==0) {
@@ -73,18 +75,21 @@ public class App {
                 styrka=styrka*2;
                 kunskap=kunskap*2;
             }
-            while (spelarHälsa==0 || motståndarHälsa==0) {
+            while (true) {
             motståndarHälsa = motståndarHälsa-spelarAttack(styrka, kunskap);
             System.out.println("Motståndarhälsa: "+motståndarHälsa);
             spelarHälsa = spelarHälsa - motståndarAttack();
             System.out.println("Din hälsa: "+spelarHälsa);
             if (spelarHälsa<=0) {
-                spelarHälsa=0;
+                System.out.println("Du förlorar, hur fan de ska vara tutorial mobs");
+                break;
             }
             else if (motståndarHälsa<=0) {
-                motståndarHälsa=0;
+                System.out.println("Du får leva ännu en dag");
+                break;
             }
             }
+            
 
 
             
