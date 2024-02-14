@@ -4,9 +4,14 @@ import java.util.Random;
 public class App {
 
     public static int spelarHälsa = 1000;
-    public static int motståndarHälsa = 1000; 
-    public static String[]attackNamn = {"Palmstrike","Right hook","Spin kick","Low sweep","Front kick"};
-    public static int []attackSkada = {7, 8,10,4,7};
+    public static int spelarHälsaBase = 1000;
+    public static int motståndarHälsaBase = 1000;
+    public static double motståndarHälsa = 1000; 
+    public static String[]attackNamn = {"Palmstrike","Right hook","Spin kick","Low sweep","Front kick","Body slam","Slap","Uppercut","Quick slap","Heavy hit","Wuxi finger hold","Head rush"};
+    public static int []attackSkada = {7, 8,10,4,7,1,4,8,2,8,1,12};
+    public static Random rand = new Random();
+    public static int vikt = rand.nextInt(100);
+    
     public static void main(String[] args) throws Exception {
         String spela = "ja";
         Scanner tb = new Scanner(System.in);
@@ -51,6 +56,7 @@ public class App {
                 }
             }
             System.out.println("Efter du valt ditt vapen svartntar allt för ögonen och du kollapsar. När du väl kan öppna ögenon hänger du över en öppen eld och ska bli uppäten av en kannibal. Du lyckas göra dig fri och nu är det upp till dig att överleva. Lycka till");
+            Thread.sleep(7000);
             System.out.println("");
             System.out.println();
             System.out.println();
@@ -62,6 +68,7 @@ public class App {
             System.out.println();
             System.out.println();
             System.out.println();
+            
 
             int styrka = 10;
             int kunskap = 3;
@@ -74,6 +81,30 @@ public class App {
             else if(val1==3){
                 styrka=styrka*2;
                 kunskap=kunskap*2;
+            }
+            if (val2==1) {
+                attackNamn[attackNamn.length]= "Swipe";
+                attackSkada[attackSkada.length]=4;
+                attackNamn[attackNamn.length]="Poke";
+                attackSkada[attackSkada.length]=3;
+                attackNamn[attackNamn.length]="Omnislash";
+                attackSkada[attackSkada.length]=10;
+            }
+            else if (val2==2){
+                attackNamn[attackNamn.length]="Triple shot";
+                attackSkada[attackSkada.length]=6;
+                attackNamn[attackNamn.length]="Quick shot";
+                attackSkada[attackSkada.length]=2;
+                attackNamn[attackNamn.length]="The collector";
+                attackSkada[attackSkada.length]=7;
+            }
+            else if (val2==3) {
+                attackNamn[attackNamn.length]="Launch";
+                attackSkada[attackSkada.length]=2;
+                attackNamn[attackNamn.length]="Canonslap";
+                attackSkada[attackSkada.length]=3;
+                attackNamn[attackNamn.length]="Canonshot";
+                attackSkada[attackSkada.length]=12;
             }
             while (true) {
             motståndarHälsa = motståndarHälsa-spelarAttack(styrka, kunskap);
@@ -89,7 +120,7 @@ public class App {
                 break;
             }
             }
-            
+
 
 
             
@@ -99,7 +130,7 @@ public class App {
     static int spelarAttack (int styrka, int kunskap){
         Scanner in = new Scanner(System.in);
         int attackVal = 0;
-        Random rand = new Random();
+        
         int[]attackRandom= new int[kunskap];
         for (int i=0; i<kunskap;i++){
             attackRandom[i] =   rand.nextInt(5);
@@ -123,6 +154,17 @@ public class App {
             
         int skada = attackSkada[attackRandom[attackVal-1]];
             skada = skada*styrka;
+        if (attackNamn[attackVal].equals("Head rush")) {
+            spelarHälsa=spelarHälsa-(skada/2);
+        }
+        else if (attackNamn[attackVal].equalsIgnoreCase("Body slam")|| attackNamn[attackVal].equalsIgnoreCase("Launch")) {
+            skada=skada*vikt;
+        }
+        else if (attackNamn[attackVal].equalsIgnoreCase("Wuxi finger hold")) {
+            if (motståndarHälsa<=(motståndarHälsaBase/10)) {
+                motståndarHälsa=0;
+            }
+        }
         return skada;
         }
         static int motståndarAttack (){
