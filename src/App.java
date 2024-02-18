@@ -8,11 +8,10 @@ public class App {
     public static int motståndarHälsaBase = 1000;
     public static int motståndarHälsa = 1000; 
     public static String[]attackNamn = {"Palmstrike","Right hook","Spin kick","Low sweep","Front kick","Body slam","Slap","Uppercut","Quick slap","Heavy hit","Wuxi finger hold","Head rush"};
-    public static int []attackSkada = {7, 8,10,4,7,1,4,8,2,8,1,12};
+    public static int []attackSkada = {7, 8,10,4,7,5,4,8,2,8,1,12};
     public static String[]attackNamnAlla = new String[15];
     public static int[]attackSkadaAlla = new int[15];
     public static Random rand = new Random();
-    public static int vikt = rand.nextInt(100);
     
     public static void main(String[] args) throws Exception {
         String spela = "ja";        
@@ -71,7 +70,8 @@ public class App {
             System.out.println();
             System.out.println();
             
-
+            motståndarHälsa = motståndarHälsaBase;
+            spelarHälsa = spelarHälsaBase;
             int styrka = 10;
             int kunskap = 3;
             if (val1==1) {
@@ -125,12 +125,10 @@ public class App {
                 System.out.println("Du får leva ännu en dag");
                 break;
             }
-            }
+        }
+            System.out.println("Vill du spela igen?");
+            spela = tb.nextLine();
 
-
-
-            
-            spela="false";
         }
     }
     static int spelarAttack (int styrka, int kunskap){
@@ -160,28 +158,17 @@ public class App {
             
         int skada = attackSkadaAlla[attackRandom[attackVal-1]];
         System.out.println(skada);
-            skada = skada*styrka;
-        if (attackNamnAlla[attackVal].equals("Head rush")) {
-            spelarHälsa=spelarHälsa-(skada/2);
-        }
-        else if (attackNamnAlla[attackVal].equalsIgnoreCase("Body slam")|| attackNamnAlla[attackVal].equalsIgnoreCase("Launch")) {
-            skada=skada*vikt;
-        }
-        else if (attackNamnAlla[attackVal].equalsIgnoreCase("Wuxi finger hold")) {
-            if (motståndarHälsa<=(motståndarHälsaBase/10)) {
-                motståndarHälsa=0;
-            }
-            else{
-                System.out.println("Motståndaren skrattar åt dig");
-            }
-        }
+        skada = skada*styrka;
+        System.out.println(skada);
+       
+        
         System.out.println(skada);
         return skada;
         
         }
         static int motståndarAttack (){
             Random rand = new Random();
-            int motsåndarSlag = rand.nextInt(5);
+            int motsåndarSlag = rand.nextInt(8);
             int skadanGjord = attackSkada[motsåndarSlag]*10;
             System.out.println("Motståndaren använder: "+attackNamn[motsåndarSlag]+ " Och skadar dig för "+skadanGjord);
             return skadanGjord;
