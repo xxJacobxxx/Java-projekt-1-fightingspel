@@ -6,20 +6,22 @@ public class App {
     public static int spelarHälsa = 1000;
     public static int spelarHälsaBase = 1000;
     public static int motståndarHälsaBase = 1000;
-    public static double motståndarHälsa = 1000; 
+    public static int motståndarHälsa = 1000; 
     public static String[]attackNamn = {"Palmstrike","Right hook","Spin kick","Low sweep","Front kick","Body slam","Slap","Uppercut","Quick slap","Heavy hit","Wuxi finger hold","Head rush"};
     public static int []attackSkada = {7, 8,10,4,7,1,4,8,2,8,1,12};
+    public static String[]attackNamnAlla = new String[15];
+    public static int[]attackSkadaAlla = new int[15];
     public static Random rand = new Random();
     public static int vikt = rand.nextInt(100);
     
     public static void main(String[] args) throws Exception {
-        String spela = "ja";
+        String spela = "ja";        
         Scanner tb = new Scanner(System.in);
         while (spela.equalsIgnoreCase("ja")) {
             System.out.println("Du befinner dig på en båt påväg mot sydamerikas regnskogar. Som praktikant arbete ska du studera Dendrobatidae grodan, även känd som pilgiftsgrodan. Efter flera timmar av konstant tom horisont kommer en väldigt smal och ilsken kemist och ställer dig inför ett val.");
-            Thread.sleep(15000);
+           // Thread.sleep(15000);
             System.out.println("Det är tufft i skogarna. säger han. Jag kan ge dig en liten boost av styrka med mina hemgjorda steroider eller så kan du få lite kunskap för att verkligen förstå allt som händer i skogen.");
-            Thread.sleep(10000);
+           // Thread.sleep(10000);
             int val1=0;
             while (val1==0) {
                 System.out.println("Väljer du 1: styrkan, 2: kunskapen eller 3: vill du försöka bli vän med kemisten?");
@@ -37,7 +39,7 @@ public class App {
             }
         }
             System.out.println("Efter kemisten givit dig det du bett om tar du dig ner till under deck, en konsekvens av att vara uttråkad. Vapenrummet är fullt med, ja vapen i alla former. Dina ögon dras först till ett svärd. Svärdet verkar vara av asiatiskt ursprung och glänser när solen speglas av det. Till vänster om svärdet har någon sattit upp en flintlock pistol på väggen. Den hade varit dödlig om skotten träffade tänker du medans dina ögon seglar mot elefanten i rummet. Kanonen står ståtligt, laddad och redo för att sänka skepp.");
-            Thread.sleep(10000);;
+           // Thread.sleep(10000);;
             System.out.println("Du bestämmer dig att ta med ett vapen till skogen.");
             int val2=0;
             while (val2==0) {
@@ -56,7 +58,7 @@ public class App {
                 }
             }
             System.out.println("Efter du valt ditt vapen svartntar allt för ögonen och du kollapsar. När du väl kan öppna ögenon hänger du över en öppen eld och ska bli uppäten av en kannibal. Du lyckas göra dig fri och nu är det upp till dig att överleva. Lycka till");
-            Thread.sleep(7000);
+           // Thread.sleep(7000);
             System.out.println("");
             System.out.println();
             System.out.println();
@@ -82,29 +84,33 @@ public class App {
                 styrka=styrka*2;
                 kunskap=kunskap*2;
             }
+            for(int i=0; i<attackNamn.length; i++){
+                attackNamnAlla[i] = attackNamn[i];
+                attackSkadaAlla[i] = attackSkada[i];
+            }
             if (val2==1) {
-                attackNamn[attackNamn.length]= "Swipe";
-                attackSkada[attackSkada.length]=4;
-                attackNamn[attackNamn.length]="Poke";
-                attackSkada[attackSkada.length]=3;
-                attackNamn[attackNamn.length]="Omnislash";
-                attackSkada[attackSkada.length]=10;
+                attackNamnAlla[12]= "Swipe";
+                attackSkadaAlla[12]=4;
+                attackNamnAlla[13]="Poke";
+                attackSkadaAlla[13]=3;
+                attackNamnAlla[14]="Omnislash";
+                attackSkadaAlla[14]=10;
             }
             else if (val2==2){
-                attackNamn[attackNamn.length]="Triple shot";
-                attackSkada[attackSkada.length]=6;
-                attackNamn[attackNamn.length]="Quick shot";
-                attackSkada[attackSkada.length]=2;
-                attackNamn[attackNamn.length]="The collector";
-                attackSkada[attackSkada.length]=7;
+                attackNamnAlla[12]="Triple shot";
+                attackSkadaAlla[12]=6;
+                attackNamnAlla[13]="Quick shot";
+                attackSkadaAlla[13]=2;
+                attackNamnAlla[14]="The collector";
+                attackSkadaAlla[14]=7;
             }
             else if (val2==3) {
-                attackNamn[attackNamn.length]="Launch";
-                attackSkada[attackSkada.length]=2;
-                attackNamn[attackNamn.length]="Canonslap";
-                attackSkada[attackSkada.length]=3;
-                attackNamn[attackNamn.length]="Canonshot";
-                attackSkada[attackSkada.length]=12;
+                attackNamnAlla[12]="Launch";
+                attackSkadaAlla[12]=2;
+                attackNamnAlla[13]="Canonslap";
+                attackSkadaAlla[13]=3;
+                attackNamnAlla[14]="Canonshot";
+                attackSkadaAlla[14]=12;
             }
             while (true) {
             motståndarHälsa = motståndarHälsa-spelarAttack(styrka, kunskap);
@@ -133,10 +139,10 @@ public class App {
         
         int[]attackRandom= new int[kunskap];
         for (int i=0; i<kunskap;i++){
-            attackRandom[i] =   rand.nextInt(5);
+            attackRandom[i] =   rand.nextInt(14);
         }
             for(int i=0;i<kunskap;i++){
-            System.out.println("Attack "+(i+1)+": "+attackNamn[attackRandom[i]]);
+            System.out.println("Attack "+(i+1)+": "+attackNamnAlla[attackRandom[i]]);
             }
             boolean bryt=false;
             do {
@@ -152,20 +158,26 @@ public class App {
             }
         }while(bryt==false);
             
-        int skada = attackSkada[attackRandom[attackVal-1]];
+        int skada = attackSkadaAlla[attackRandom[attackVal-1]];
+        System.out.println(skada);
             skada = skada*styrka;
-        if (attackNamn[attackVal].equals("Head rush")) {
+        if (attackNamnAlla[attackVal].equals("Head rush")) {
             spelarHälsa=spelarHälsa-(skada/2);
         }
-        else if (attackNamn[attackVal].equalsIgnoreCase("Body slam")|| attackNamn[attackVal].equalsIgnoreCase("Launch")) {
+        else if (attackNamnAlla[attackVal].equalsIgnoreCase("Body slam")|| attackNamnAlla[attackVal].equalsIgnoreCase("Launch")) {
             skada=skada*vikt;
         }
-        else if (attackNamn[attackVal].equalsIgnoreCase("Wuxi finger hold")) {
+        else if (attackNamnAlla[attackVal].equalsIgnoreCase("Wuxi finger hold")) {
             if (motståndarHälsa<=(motståndarHälsaBase/10)) {
                 motståndarHälsa=0;
             }
+            else{
+                System.out.println("Motståndaren skrattar åt dig");
+            }
         }
+        System.out.println(skada);
         return skada;
+        
         }
         static int motståndarAttack (){
             Random rand = new Random();
